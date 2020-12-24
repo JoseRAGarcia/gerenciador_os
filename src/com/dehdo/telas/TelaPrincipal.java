@@ -51,12 +51,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciador de OS");
+        setPreferredSize(new java.awt.Dimension(915, 500));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
+
+        desktop.setPreferredSize(new java.awt.Dimension(676, 480));
 
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
         desktop.setLayout(desktopLayout);
@@ -66,7 +69,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
         desktopLayout.setVerticalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 480, Short.MAX_VALUE)
         );
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dehdo/icones/cats-crop.png"))); // NOI18N
@@ -82,15 +85,30 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menCadCli.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
         menCadCli.setText("Cliente");
+        menCadCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menCadCliActionPerformed(evt);
+            }
+        });
         menCad.add(menCadCli);
 
         menCadOs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK));
         menCadOs.setText("OS");
+        menCadOs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menCadOsActionPerformed(evt);
+            }
+        });
         menCad.add(menCadOs);
 
         menCadUsu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
         menCadUsu.setText("Usuários");
         menCadUsu.setEnabled(false);
+        menCadUsu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menCadUsuActionPerformed(evt);
+            }
+        });
         menCad.add(menCadUsu);
 
         menu.add(menCad);
@@ -166,13 +184,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addComponent(lblUsuario)
                         .addGap(36, 36, 36)
                         .addComponent(lblData)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1))
-                    .addComponent(desktop))
+                    .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(915, 523));
+        setSize(new java.awt.Dimension(915, 538));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -202,6 +220,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
         TelaSobre sobre = new TelaSobre();
         sobre.setVisible(true);
     }//GEN-LAST:event_menAjuSobActionPerformed
+
+    private void menCadUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadUsuActionPerformed
+        // As linhas abaixo vão abrir o form TelaUsuario dentro do desktopPanel
+        TelaUsuario usuario = new TelaUsuario();
+        usuario.setVisible(true);
+        desktop.add(usuario);
+    }//GEN-LAST:event_menCadUsuActionPerformed
+
+    private void menCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadCliActionPerformed
+        // As linhas abaixo vão abrir o form TelaCliente dentro do desktopPanel
+        TelaCliente cliente = new TelaCliente();
+        cliente.setVisible(true);
+        desktop.add(cliente);
+    }//GEN-LAST:event_menCadCliActionPerformed
+
+    private void menCadOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadOsActionPerformed
+        // Chamando a tela OS
+        TelaOS os = new TelaOS();
+        os.setVisible(true);
+        desktop.add(os);
+    }//GEN-LAST:event_menCadOsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,7 +281,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane desktop;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblData;
-    private javax.swing.JLabel lblUsuario;
+    public static javax.swing.JLabel lblUsuario;
     private javax.swing.JMenu menAju;
     private javax.swing.JMenuItem menAjuSob;
     private javax.swing.JMenu menCad;

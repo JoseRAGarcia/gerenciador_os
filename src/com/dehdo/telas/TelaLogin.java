@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dehdo.telas;
 
 import java.sql.*;
 import com.dehdo.dal.ModuloConexao;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Dedo
- */
 public class TelaLogin extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
@@ -32,10 +23,25 @@ public class TelaLogin extends javax.swing.JFrame {
             
             // Se existir usuário e senha correspondente:
             if(rs.next()){
-                TelaPrincipal principal = new TelaPrincipal();
-                principal.setVisible(true);
-                this.dispose();
-                conexao.close();
+                // A linha abaixo obtém o conteúdo do campo perfil da tabela usuario
+                String perfil = rs.getString(6);
+                
+                if(perfil.equals("admin")){
+                    TelaPrincipal principal = new TelaPrincipal();
+                    principal.setVisible(true);
+                    TelaPrincipal.menRel.setEnabled(true);
+                    TelaPrincipal.menCadUsu.setEnabled(true);
+                    TelaPrincipal.lblUsuario.setText(rs.getString(2));
+                    this.dispose();
+                    conexao.close();                    
+                }
+                else{
+                    TelaPrincipal principal = new TelaPrincipal();
+                    principal.setVisible(true);  
+                    TelaPrincipal.lblUsuario.setText(rs.getString(2));
+                    this.dispose();
+                    conexao.close();  
+                }                
             }
             else{
                 JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválido(s)");
